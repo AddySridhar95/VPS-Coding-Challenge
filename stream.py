@@ -21,7 +21,6 @@ def background_thread():
     """Send server generated events to clients."""
     while True:
         sleep_time = generate_random(200, 1000) / float(1000)
-        print sleep_time
         time.sleep(sleep_time)
         watts = random.randint(0, 3000) / float(10)
         socketio.emit('my response',
