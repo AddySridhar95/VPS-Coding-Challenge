@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Flask-SocketIO Test</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function(){
+            namespace = '/test';
+            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+            socket.on('connect', function() {
+                socket.emit('my event', {data: 'I\'m connected!'});
+            });
+            socket.on('my response', function(msg) {
+                $('#log').html('<br>Generated ' + msg.watts + ' Watts after ' + msg.sleep_time + ' seconds');
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Power Reading Simulator</h1>
+    <p>This app generates a random power reading, <i>x</i> every <i>y</i> milliseconds where <i>x</i> is between 0 to 300 watts and <i>y</i> is between 200 and 1000 milliseconds.</p>
+    <p>Created using the Flask extention <a target="_blank" href="http://flask-socketio.readthedocs.org/en/latest/">flask-SocketIO</a></p>
+    <div id="log"></div>
+</body>
+</html>
